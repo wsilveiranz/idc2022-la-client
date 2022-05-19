@@ -56,7 +56,8 @@ jobs:
       uses: azure/CLI@v1
       with:
         azcliversion: 2.0.72
-        inlineScript: |         
+        inlineScript: |
+          az account set         
           az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ secrets.RG_LA }} --settings "WORKFLOWS_RESOURCE_GROUP_NAME=${{ secrets.RG_CON }}"
           az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ secrets.RG_LA }} --settings "azureeventgridpublish-connectionKey=${{ secrets.EVTGRID_KEY }}"
 
