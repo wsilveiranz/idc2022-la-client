@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "ARM/**"
+      - ".deployment/ARM/**"
       - ".github/workflows/IaC_deploy.yml"
 
 jobs:
