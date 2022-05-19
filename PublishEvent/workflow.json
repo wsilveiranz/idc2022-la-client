@@ -52,7 +52,7 @@
                             "type": "SetVariable",
                             "inputs": {
                                 "name": "eventName",
-                                "value": "OtherEvents"
+                                "value": "MicrosoftEvent"
                             },
                             "runAfter": {}
                         }
