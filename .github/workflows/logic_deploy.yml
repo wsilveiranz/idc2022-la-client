@@ -5,7 +5,6 @@ name: (classic) Build and Deploy Logic App.
 
 env:
   LA_NAME: 'la-idcdemo2022-client'
-  RG_LA: 'IDCDemo2022'
 
 on:
   workflow_dispatch:
@@ -62,7 +61,7 @@ jobs:
       with:
         inlineScript: |
           $profile = Get-AzWebAppPublishingProfile `
-              -ResourceGroupName ${{ env.RG_LA }} `
+              -ResourceGroupName ${{ secrets.RG_LA }} `
               -Name ${{ env.LA_NAME }}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
