@@ -65,7 +65,7 @@
         {
             "type": "Microsoft.Web/connections/accessPolicies",
             "apiVersion": "2016-06-01",
-            "name": "[concat(parameters('connections_azureeventgridpublish_namee'),'/',parameters('logicAppSystemAssignedIdentityObjectId'))]",
+            "name": "[concat(parameters('connections_azureeventgridpublish_name'),'/',parameters('logicAppSystemAssignedIdentityObjectId'))]",
             "location": "australiaeast",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/connections', parameters('connections_azureeventgridpublish_name'))]"
