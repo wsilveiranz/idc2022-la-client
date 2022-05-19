@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "metadata": {
+              "description": "The datacenter to use for the deployment."
+            }
+        },
+        "logicAppSystemAssignedIdentityTenantId": {
+            "type": "string"
+        },
+        "logicAppSystemAssignedIdentityObjectId": {
+            "type": "string"
+        },
+        "sa_name": {
+            "defaultValue": "storage name",
+            "type": "string"
+        }, 
+        "connections_azureeventgridpublish_name": {
+            "defaultValue": "azureeventgridpublish",
+            "type": "string"
+        }
+    },
+    "variables": {
+        "sa": "[concat(toLower(parameters('sa_name')), uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_azureeventgridpublish_name')]",
+            "location": "australiaeast",
+            "tags": {
+                "createdBy": "wsilveira@microsoft.com",
+                "createdTime": "2022-05-19T02:24:03.6859567Z"
+            },
+            "kind": "V2",
+            "properties": {
+                "displayName": "eg-publisher",
+                "statuses": [
+                    {
+                        "status": "Connected"
+                    }
+                ],
+                "customParameterValues": {},
+                "nonSecretParameterValues": {
+                    "endpoint": "https://eg-idcdemo2002.australiaeast-1.eventgrid.azure.net/api/events"
+                },
+                "createdTime": "2022-05-19T02:22:59.1493625Z",
+                "changedTime": "2022-05-19T02:24:07.2637832Z",
+                "api": {
+                    "name": "[parameters('connections_azureeventgridpublish_name')]",
+                    "displayName": "Azure Event Grid Publish",
+                    "description": "Azure Event Grid Publish will publish data to any Azure Event Grid Custom Topic.",
+                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1538/1.0.1538.2619/', parameters('connections_azureeventgridpublish_name'), '/icon.png')]",
+                    "brandColor": "#0072c6",
+                    "id": "[concat('/subscriptions/80d4fe69-c95b-4dd2-a938-9250f1c8ab03/providers/Microsoft.Web/locations/australiaeast/managedApis/', parameters('connections_azureeventgridpublish_name'))]",
+                    "type": "Microsoft.Web/locations/managedApis"
+                },
+                "testLinks": []
+            }
+        },      
+        {
+            "type": "Microsoft.Web/connections/accessPolicies",
+            "apiVersion": "2016-06-01",
+            "name": "[concat(parameters('connections_azureeventgridpublish_namee'),'/',parameters('logicAppSystemAssignedIdentityObjectId'))]",
+            "location": "australiaeast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/connections', parameters('connections_azureeventgridpublish_name'))]"
+            ],
+            "properties": {
+                "principal": {
+                    "type": "ActiveDirectory",
+                    "identity": {
+                        "tenantId": "[parameters('logicAppSystemAssignedIdentityTenantId')]",
+                        "objectId": "[parameters('logicAppSystemAssignedIdentityObjectId')]"
+                    }
+                }
+            }
+        }
+   
+    ],
+    "outputs": {
+      "blobendpointurl": {
+        "type": "string",
+        "value": "[reference(resourceId('Microsoft.Web/connections', parameters('connections_azureeventgridpublish_name')),'2016-06-01', 'full').properties.connectionRuntimeUrl]"
+      }
+    }
+}

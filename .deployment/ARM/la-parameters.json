@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": { 
+        "location": {
+            "value": "Australia East"
+        },
+        "environmentName": {
+            "value": "Dev"
+        },
+        "projectName": {
+            "value": "IDCDemo2022"
+        },
+        "logicAppName": {
+            "value": "idc2022-la-client"
+        },
+        "appServicePlanName": {
+            "value": "wsilveirasandbox_ws1"
+        },
+        "storageName": {
+            "value": "idcdemo2022laclientstor"
+        },
+        "kind": {
+            "value": "StorageV2"
+        },
+        "skuName": {
+            "value": "Standard_LRS"
+        },
+        "skuTier": {
+            "value": "Standard"
+          }
+        }
+    }
