@@ -14,7 +14,7 @@
         "sa_name": {
             "value": "idc2022-la-client"
         },
-        "connections_azureblob_name": {
+        "connections_azureeventgridpublish_name": {
             "value":"azureeventgridpublish"
         }
     }
