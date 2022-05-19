@@ -15,7 +15,7 @@
             "value": "la-idcdemo2022-client"
         },
         "appServicePlanName": {
-            "value": "wsilveirasandbox_ws1"
+            "value": "wsilveirasandbox-ws1"
         },
         "storageName": {
             "value": "idcdemo2022laclientstor"
