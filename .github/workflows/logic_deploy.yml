@@ -16,9 +16,8 @@ on:
       - completed
   # Triggers when an environment file has been changed  
   push:
-    paths:
-      - "./**"
-      - ".github/workflows/logicapp_deploy.yml"
+    branches:
+      - main
 
 jobs:
   logic_app_build: 
