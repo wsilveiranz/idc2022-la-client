@@ -1,0 +1,107 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Publish_Event": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "azureeventgridpublish"
+                        }
+                    },
+                    "method": "post",
+                    "body": [
+                        {
+                            "id": "@triggerBody()?['messageid']",
+                            "subject": "Event for a PoC on IDC presentation",
+                            "eventType": "@variables('eventName')",
+                            "data": "@triggerBody()?['message']",
+                            "eventTime": "@{utcNow()}"
+                        }
+                    ],
+                    "path": "/eventGrid/api/events"
+                },
+                "runAfter": {
+                    "Switch": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Switch": {
+                "type": "Switch",
+                "expression": "@triggerBody()?['operation']",
+                "cases": {
+                    "Case": {
+                        "case": "NewEvent",
+                        "actions": {
+                            "Set_variable_to_IDCEvent": {
+                                "type": "SetVariable",
+                                "inputs": {
+                                    "name": "eventName",
+                                    "value": "IDCDemoEvent"
+                                },
+                                "runAfter": {}
+                            }
+                        }
+                    }
+                },
+                "default": {
+                    "actions": {
+                        "Set_variable_to_Other_Events": {
+                            "type": "SetVariable",
+                            "inputs": {
+                                "name": "eventName",
+                                "value": "OtherEvents"
+                            },
+                            "runAfter": {}
+                        }
+                    }
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Initialize_variable": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "eventName",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {}
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "messageid": {
+                                "type": "string"
+                            },
+                            "operation": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    },
+    "kind": "Stateless"
+}
