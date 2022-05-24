@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": { 
         "location": {
-            "value": "Australia East"
+            "value": "australiaeast"
         },
         "environmentName": {
             "value": "Dev"
@@ -15,7 +15,7 @@
             "value": "la-idcdemo2022-client"
         },
         "appServicePlanName": {
-            "value": "wsilveirasandbox_ws1"
+            "value": "idcdemo2022ws1"
         },
         "storageName": {
             "value": "idcdemo2022laclientstor"
