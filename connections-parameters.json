@@ -1,0 +1,18 @@
+{
+  "managedApiConnections": {
+    "azureeventgridpublish": {
+      "api": {
+        "id": "/subscriptions/@{parameters('WORKFLOWS_SUBSCRIPTION_ID')}/providers/Microsoft.Web/locations/australiaeast/managedApis/azureeventgridpublish"
+      },
+      "connection": {
+        "id": "/subscriptions/@{parameters('WORKFLOWS_SUBSCRIPTION_ID')}/resourceGroups/@{parameters('WORKFLOWS_RESOURCE_GROUP_NAME')}/providers/Microsoft.Web/connections/azureeventgridpublish"
+      },
+      "connectionRuntimeUrl": "@{parameters('azureeventgridpublish-runtimeUrl')}",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('azureeventgridpublish-connectionKey')"
+      }
+    }
+  }
+}

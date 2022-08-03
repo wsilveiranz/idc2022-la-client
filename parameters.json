@@ -1,0 +1,22 @@
+{
+  "servicebusqueue": {
+    "type": "String",
+    "value": "servicebus-sample-demo"
+  },
+  "testparamter": {
+    "type": "string",
+    "value": "myvalue"
+  },
+  "WORKFLOWS_SUBSCRIPTION_ID": {
+    "type": "string",
+    "value": "80d4fe69-c95b-4dd2-a938-9250f1c8ab03"
+  },
+  "WORKFLOWS_RESOURCE_GROUP_NAME": {
+    "type": "string",
+    "value": "IDCDemo2022"
+  },
+  "azureeventgridpublish-runtimeUrl": {
+    "type": "string",
+    "value": "https://9d51d1ffc9f77572.00.common.logic-australiaeast.azure-apihub.net/apim/azureeventgridpublish/e2ec76249c424bd6b64765b3d5f723aa/"
+  }
+}

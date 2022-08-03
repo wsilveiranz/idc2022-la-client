@@ -1,0 +1,29 @@
+{
+  "managedApiConnections": {
+    "azureeventgridpublish": {
+      "api": {
+        "id": "/subscriptions/@{appsetting('WORKFLOWS_SUBSCRIPTION_ID')}/providers/Microsoft.Web/locations/australiaeast/managedApis/azureeventgridpublish"
+      },
+      "connection": {
+        "id": "/subscriptions/@{appsetting('WORKFLOWS_SUBSCRIPTION_ID')}/resourceGroups/@{appsetting('WORKFLOWS_RESOURCE_GROUP_NAME')}/providers/Microsoft.Web/connections/azureeventgridpublish"
+      },
+      "connectionRuntimeUrl": "@appsetting('azureeventgridpublish-runtimeUrl')",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('azureeventgridpublish-connectionKey')"
+      }
+    }
+  },
+  "serviceProviderConnections": {
+    "sql": {
+      "parameterValues": {
+        "connectionString": "@appsetting('sql_connectionString')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/sql"
+      },
+      "displayName": "mysqlserver"
+    }
+  }
+}
